@@ -11,7 +11,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
 import { Input } from '@/components/ui/input'; // For the explicit search bar if needed, though AppHeader handles it
 
-import { ShoppingBag, Apple, Carrot, Milk, VenetianMask as Candy, Search } from 'lucide-react'; // Using VenetianMask for Candy as Candy icon might not be available or suitable. Let's use a better icon for snacks if available. `Cookie` is good.
+import { ShoppingBag, Apple, Carrot, Milk, Search, Cookie } from 'lucide-react'; // Added Cookie icon
 
 // Sample Data
 const promotions = [
