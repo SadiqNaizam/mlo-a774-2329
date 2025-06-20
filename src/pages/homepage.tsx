@@ -21,11 +21,11 @@ const promotions = [
 ];
 
 const categories = [
-  { name: 'Groceries', slug: 'groceries', Icon: ShoppingBag },
-  { name: 'Fruits', slug: 'fruits', Icon: Apple },
-  { name: 'Vegetables', slug: 'vegetables', Icon: Carrot },
-  { name: 'Dairy', slug: 'dairy', Icon: Milk },
-  { name: 'Snacks', slug: 'snacks', Icon: Cookie }, // Using Cookie for Snacks
+  { name: 'Groceries', slug: 'groceries', Icon: ShoppingBag, imageUrl: 'https://source.unsplash.com/100x100/?groceries,food,basket' },
+  { name: 'Fruits', slug: 'fruits', Icon: Apple, imageUrl: 'https://source.unsplash.com/100x100/?fruits,apple,orange' },
+  { name: 'Vegetables', slug: 'vegetables', Icon: Carrot, imageUrl: 'https://source.unsplash.com/100x100/?vegetables,carrot,broccoli' },
+  { name: 'Dairy', slug: 'dairy', Icon: Milk, imageUrl: 'https://source.unsplash.com/100x100/?dairy,milk,cheese' },
+  { name: 'Snacks', slug: 'snacks', Icon: Cookie, imageUrl: 'https://source.unsplash.com/100x100/?snacks,chips,cookies' },
 ];
 
 const featuredProducts: ProductCardProps[] = [
@@ -96,9 +96,10 @@ const HomePage: React.FC = () => {
                     key={category.slug}
                     categoryName={category.name}
                     categorySlug={category.slug}
-                    IconComponent={category.Icon}
+                    IconComponent={category.imageUrl ? undefined : category.Icon}
+                    imageUrl={category.imageUrl}
                   />
-                ))}\
+                ))}
               </div>
             </section>
 
