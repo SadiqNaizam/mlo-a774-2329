@@ -1,9 +1,10 @@
 import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input"; // Placeholder, might use just text for quantity
+import { Input } from "@/components/ui/input";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Minus, Plus, Trash2 } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export interface CartItemCardProps {
   id: string | number;
@@ -11,14 +12,19 @@ export interface CartItemCardProps {
   price: number;
   quantity: number;
   imageUrl: string;
-  // Optional: attributes like size, color, if applicable for the product
   attributes?: { [key: string]: string };
   onQuantityChange: (itemId: string | number, newQuantity: number) => void;
   onRemoveItem: (itemId: string | number) => void;
-  // Optional: currency symbol
   currencySymbol?: string;
-  stockLimit?: number; // Max quantity user can add
+  stockLimit?: number;
 }
+
+const cartItemVariants = {
+  initial: { opacity: 0, x: -20 },
+  animate: { opacity: 1, x: 0 },
+  exit: { opacity: 0, x: 20, transition: { duration: 0.2 } },
+  transition: { duration: 0.3, ease: "easeOut" }
+};
 
 const CartItemCard: React.FC<CartItemCardProps> = ({
   id,
@@ -30,7 +36,7 @@ const CartItemCard: React.FC<CartItemCardProps> = ({
   onQuantityChange,
   onRemoveItem,
   currencySymbol = '$',
-  stockLimit = 10, // Default stock limit
+  stockLimit = 10,
 }) => {
   console.log(`CartItemCard loaded for item ID: ${id}, Name: ${name}`);
 
@@ -38,14 +44,10 @@ const CartItemCard: React.FC<CartItemCardProps> = ({
     if (quantity > 1) {
       onQuantityChange(id, quantity - 1);
     }
-    // Optionally, if quantity is 1 and decrement is pressed, remove item.
-    // else if (quantity === 1) {
-    //   onRemoveItem(id);
-    // }
   };
 
   const handleIncrement = () => {
-    if (quantity < stockLimit) { // Respect stock limit
+    if (quantity < stockLimit) {
         onQuantityChange(id, quantity + 1);
     }
   };
@@ -54,8 +56,20 @@ const CartItemCard: React.FC<CartItemCardProps> = ({
     onRemoveItem(id);
   };
 
+  // This component will be animated by its parent list (CartPage) using AnimatePresence and motion.div wrapper per item.
+  // However, if we want it to be self-animating on initial load without list context, we can use:
+  // initial="initial" whileInView="animate" viewport={{ once: true, amount: 0.1 }} variants={cartItemVariants} transition={cartItemVariants.transition}
+  // For this exercise, let's assume parent list in CartPage will handle animation.
+  // If this component is used elsewhere without list animation, below could be added:
+  // <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.3 }}> ... </motion.div>
+  // For now, no direct motion.div wrapper here if CartPage handles stagger/AnimatePresence
+
   return (
-    <Card className="flex flex-col sm:flex-row items-stretch overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200">
+    // The Card itself can be a motion component if CartPage does not wrap it for AnimatePresence.
+    // For now, assuming CartPage will wrap this in a motion.li or motion.div for list animations.
+    // If CartPage isn't modified for this, then we'd wrap this Card:
+    // <motion.div variants={...} initial animate exit> <Card...> ... </Card> </motion.div>
+     <Card className="flex flex-col sm:flex-row items-stretch overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200">
       <div className="w-full sm:w-24 md:w-32 flex-shrink-0">
         <AspectRatio ratio={1} className="bg-muted">
           <img
@@ -71,7 +85,7 @@ const CartItemCard: React.FC<CartItemCardProps> = ({
           <h3 className="text-lg font-semibold line-clamp-2">{name}</h3>
           {attributes && Object.entries(attributes).map(([key, value]) => (
             <p key={key} className="text-sm text-muted-foreground">{`${key}: ${value}`}</p>
-          ))}
+          ))}\
           <p className="text-base font-bold text-primary mt-1">
             {currencySymbol}{(price * quantity).toFixed(2)}
           </p>
@@ -79,7 +93,7 @@ const CartItemCard: React.FC<CartItemCardProps> = ({
             <p className="text-xs text-muted-foreground">
               ({currencySymbol}{price.toFixed(2)} each)
             </p>
-          )}
+          )}\
         </div>
 
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-4 w-full sm:w-auto">
@@ -122,5 +136,9 @@ const CartItemCard: React.FC<CartItemCardProps> = ({
     </Card>
   );
 };
+// Note: For CartItemCard, it's often better to animate it within the list context (e.g., CartPage)
+// using AnimatePresence for additions/removals. The provided CartPage.tsx already maps items.
+// I will modify CartPage.tsx to wrap CartItemCard instances with motion.div for this.
+// So, CartItemCard.tsx itself won't get a motion wrapper internally to avoid double animations.
 
 export default CartItemCard;
