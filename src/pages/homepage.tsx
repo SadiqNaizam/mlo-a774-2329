@@ -15,9 +15,9 @@ import { ShoppingBag, Apple, Carrot, Milk, Search, Cookie } from 'lucide-react';
 
 // Sample Data with updated image URLs
 const promotions = [
-  { id: 1, imageUrl: 'https://source.unsplash.com/1200x400/?vibrant,fruit,basket,sale,display', altText: 'Fruits Discount' },
-  { id: 2, imageUrl: 'https://source.unsplash.com/1200x400/?crisp,fresh,vegetables,market,stall', altText: 'Fresh Vegetables' },
-  { id: 3, imageUrl: 'https://source.unsplash.com/1200x400/?colorful,assorted,snacks,party,offer', altText: 'Snacks Fiesta' },
+  { id: 1, imageUrl: 'https://source.unsplash.com/1200x400/?fruits,sale,discount,offer,grocery', altText: 'Fruits Discount' },
+  { id: 2, imageUrl: 'https://source.unsplash.com/1200x400/?vegetables,market,fresh,organic,promotion', altText: 'Fresh Vegetables' },
+  { id: 3, imageUrl: 'https://source.unsplash.com/1200x400/?snacks,chips,cookies,promotion,fiesta', altText: 'Snacks Fiesta' },
 ];
 
 const categories = [
