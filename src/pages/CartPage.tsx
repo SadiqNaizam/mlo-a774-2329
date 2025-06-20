@@ -1,11 +1,12 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 
 // Custom Components
 import AppHeader from '@/components/layout/AppHeader';
 import AppBottomNavigationBar from '@/components/layout/AppBottomNavigationBar';
 import StandardFooter from '@/components/layout/StandardFooter';
-import CartItemCard, { CartItemCardProps } from '@/components/CartItemCard'; // Assuming CartItemCardProps is exported
+import CartItemCard, { CartItemCardProps } from '@/components/CartItemCard';
 
 // Shadcn/ui Components
 import { Button } from '@/components/ui/button';
@@ -18,7 +19,7 @@ import { useToast } from '@/components/ui/use-toast';
 import { ShoppingCart, Trash2, TicketPercent } from 'lucide-react';
 
 interface CartItem extends Omit<CartItemCardProps, 'onQuantityChange' | 'onRemoveItem' | 'currencySymbol'> {
-  // No additional fields needed here as CartItemCardProps covers it
+  // No additional fields needed
 }
 
 const initialCartItems: CartItem[] = [
@@ -42,11 +43,23 @@ const initialCartItems: CartItem[] = [
   },
 ];
 
+const cartItemMotionVariants = {
+  initial: { opacity: 0, x: -30 },
+  animate: { opacity: 1, x: 0, transition: { duration: 0.3, ease: 'easeOut' } },
+  exit: { opacity: 0, x: 30, transition: { duration: 0.2, ease: 'easeIn' } },
+};
+
+const summaryCardAnimation = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut", delay: 0.2 } }
+};
+
+
 const CartPage: React.FC = () => {
   const [cartItems, setCartItems] = useState<CartItem[]>(initialCartItems);
   const [promoCode, setPromoCode] = useState<string>('');
   const [discountAmount, setDiscountAmount] = useState<number>(0);
-  const deliveryFee = 5.00; // Placeholder
+  const deliveryFee = 5.00;
   const { toast } = useToast();
 
   useEffect(() => {
@@ -88,7 +101,6 @@ const CartPage: React.FC = () => {
   }, [subtotal, deliveryFee, discountAmount]);
 
   const applyPromoCode = () => {
-    // Basic placeholder logic for promo code
     if (promoCode.toUpperCase() === 'SAVE10') {
       const potentialDiscount = subtotal * 0.10;
       setDiscountAmount(potentialDiscount);
@@ -97,14 +109,14 @@ const CartPage: React.FC = () => {
         description: `You saved $${potentialDiscount.toFixed(2)}.`,
       });
     } else if (promoCode.trim() !== '') {
-      setDiscountAmount(0); // Reset discount if invalid code and not empty
+      setDiscountAmount(0);
       toast({
         title: "Invalid Promo Code",
         description: "The promo code you entered is not valid.",
         variant: "destructive",
       });
     } else {
-        setDiscountAmount(0); // Reset discount if empty
+        setDiscountAmount(0);
         toast({
             title: "Enter a Promo Code",
             description: "Please enter a promo code to apply.",
@@ -118,12 +130,22 @@ const CartPage: React.FC = () => {
       <AppHeader />
 
       <main className="flex-grow container mx-auto px-4 py-6 sm:py-8 pt-20 md:pt-24 pb-24 md:pb-16">
-        <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-center md:text-left text-gray-800 dark:text-gray-100">
+        <motion.h1 
+          className="text-2xl sm:text-3xl font-bold mb-6 text-center md:text-left text-gray-800 dark:text-gray-100"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.1 }}
+        >
           Your Shopping Cart
-        </h1>
+        </motion.h1>
 
         {cartItems.length === 0 ? (
-          <div className="text-center py-12 bg-white dark:bg-slate-800 shadow-md rounded-lg">
+          <motion.div 
+            className="text-center py-12 bg-white dark:bg-slate-800 shadow-md rounded-lg"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4 }}
+          >
             <ShoppingCart className="mx-auto h-16 w-16 text-primary mb-4" />
             <p className="text-xl text-gray-700 dark:text-gray-300 mb-2">Your cart is empty.</p>
             <p className="text-gray-500 dark:text-gray-400 mb-6">
@@ -132,22 +154,35 @@ const CartPage: React.FC = () => {
             <Button asChild size="lg">
               <Link to="/product-listing">Start Shopping</Link>
             </Button>
-          </div>
+          </motion.div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
-            {/* Cart Items List */}
             <section className="lg:col-span-8 space-y-4">
-              {cartItems.map(item => (
-                <CartItemCard
-                  key={item.id}
-                  {...item} // Spread all properties including id, name, price, quantity, imageUrl, stockLimit, attributes
-                  onQuantityChange={handleQuantityChange}
-                  onRemoveItem={handleRemoveItem}
-                  currencySymbol="$"
-                />
-              ))}
+              <AnimatePresence initial={false}> {/* `initial={false}` prevents initial animation for already present items if not desired for first load */}
+                {cartItems.map(item => (
+                  <motion.div
+                    key={item.id}
+                    layout // Animates layout changes (e.g., when item removed)
+                    variants={cartItemMotionVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                  >
+                    <CartItemCard
+                      {...item}
+                      onQuantityChange={handleQuantityChange}
+                      onRemoveItem={handleRemoveItem}
+                      currencySymbol="$"
+                    />
+                  </motion.div>
+                ))}
+              </AnimatePresence>
               {cartItems.length > 0 && (
-                <div className="mt-6 text-right">
+                <motion.div 
+                  className="mt-6 text-right"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1, transition: { delay: cartItems.length * 0.05 + 0.2 } }} // Delay based on number of items
+                >
                   <Button
                     variant="outline"
                     onClick={handleClearCart}
@@ -155,12 +190,16 @@ const CartPage: React.FC = () => {
                   >
                     <Trash2 className="mr-2 h-4 w-4" /> Clear Cart
                   </Button>
-                </div>
+                </motion.div>
               )}
             </section>
 
-            {/* Order Summary */}
-            <aside className="lg:col-span-4">
+            <motion.aside 
+              className="lg:col-span-4"
+              initial="initial"
+              animate="animate"
+              variants={summaryCardAnimation}
+            >
               <Card className="shadow-lg sticky top-24 dark:bg-slate-800">
                 <CardHeader>
                   <CardTitle className="text-xl text-gray-800 dark:text-gray-100">Order Summary</CardTitle>
@@ -203,7 +242,7 @@ const CartPage: React.FC = () => {
                       <span>Discount</span>
                       <span>-${discountAmount.toFixed(2)}</span>
                     </div>
-                  )}
+                  )}\
                   
                   <Separator className="my-2 dark:bg-slate-700" />
                   
@@ -218,9 +257,9 @@ const CartPage: React.FC = () => {
                   </Button>
                 </CardFooter>
               </Card>
-            </aside>
+            </motion.aside>
           </div>
-        )}
+        )}\
       </main>
 
       <StandardFooter />
