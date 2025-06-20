@@ -15,9 +15,9 @@ import { ShoppingBag, Apple, Carrot, Milk, Search, Cookie } from 'lucide-react';
 
 // Sample Data with updated image URLs
 const promotions = [
-  { id: 1, imageUrl: 'https://source.unsplash.com/1200x400/?fruit,basket,sale', altText: 'Fruits Discount' },
-  { id: 2, imageUrl: 'https://source.unsplash.com/1200x400/?fresh,vegetables,market', altText: 'Fresh Vegetables' },
-  { id: 3, imageUrl: 'https://source.unsplash.com/1200x400/?snacks,assortment,offer', altText: 'Snacks Fiesta' },
+  { id: 1, imageUrl: 'https://source.unsplash.com/1200x400/?vibrant,fruit,basket,sale,display', altText: 'Fruits Discount' },
+  { id: 2, imageUrl: 'https://source.unsplash.com/1200x400/?crisp,fresh,vegetables,market,stall', altText: 'Fresh Vegetables' },
+  { id: 3, imageUrl: 'https://source.unsplash.com/1200x400/?colorful,assorted,snacks,party,offer', altText: 'Snacks Fiesta' },
 ];
 
 const categories = [
@@ -29,12 +29,12 @@ const categories = [
 ];
 
 const featuredProducts: ProductCardProps[] = [
-  { id: 'fp1', slug: 'fresh-apples-1kg', name: 'Fresh Red Apples', price: 2.99, unit: '1kg', imageUrl: 'https://source.unsplash.com/300x300/?red,apples' },
-  { id: 'fp2', slug: 'organic-carrots-500g', name: 'Organic Carrots', price: 1.49, unit: '500g', imageUrl: 'https://source.unsplash.com/300x300/?organic,carrots' },
-  { id: 'fp3', slug: 'whole-milk-1l', name: 'Fresh Whole Milk', price: 1.99, unit: '1L', imageUrl: 'https://source.unsplash.com/300x300/?milk,carton' },
-  { id: 'fp4', slug: 'potato-chips-large', name: 'Classic Potato Chips', price: 3.20, unit: 'Large Bag', imageUrl: 'https://source.unsplash.com/300x300/?potato,chips,snack' },
-  { id: 'fp5', slug: 'artisan-bread-loaf', name: 'Artisan Sourdough Bread', price: 4.50, unit: '1 Loaf', imageUrl: 'https://source.unsplash.com/300x300/?artisan,bread,loaf' },
-  { id: 'fp6', slug: 'free-range-eggs-dozen', name: 'Free-Range Eggs', price: 3.99, unit: '1 Dozen', imageUrl: 'https://source.unsplash.com/300x300/?eggs,carton' },
+  { id: 'fp1', slug: 'fresh-apples-1kg', name: 'Fresh Red Apples', price: 2.99, unit: '1kg', imageUrl: 'https://source.unsplash.com/300x300/?shiny,red,apples,orchard,closeup' },
+  { id: 'fp2', slug: 'organic-carrots-500g', name: 'Organic Carrots', price: 1.49, unit: '500g', imageUrl: 'https://source.unsplash.com/300x300/?vibrant,organic,carrots,bunch,fresh' },
+  { id: 'fp3', slug: 'whole-milk-1l', name: 'Fresh Whole Milk', price: 1.99, unit: '1L', imageUrl: 'https://source.unsplash.com/300x300/?fresh,whole,milk,carton,dairy,farm' },
+  { id: 'fp4', slug: 'potato-chips-large', name: 'Classic Potato Chips', price: 3.20, unit: 'Large Bag', imageUrl: 'https://source.unsplash.com/300x300/?crispy,potato,chips,snack,bowl' },
+  { id: 'fp5', slug: 'artisan-bread-loaf', name: 'Artisan Sourdough Bread', price: 4.50, unit: '1 Loaf', imageUrl: 'https://source.unsplash.com/300x300/?artisan,sourdough,bread,loaf,bakery,crusty' },
+  { id: 'fp6', slug: 'free-range-eggs-dozen', name: 'Free-Range Eggs', price: 3.99, unit: '1 Dozen', imageUrl: 'https://source.unsplash.com/300x300/?brown,free-range,eggs,carton,farm' },
 ];
 
 const HomePage: React.FC = () => {
@@ -98,7 +98,7 @@ const HomePage: React.FC = () => {
                     categorySlug={category.slug}
                     IconComponent={category.Icon}
                   />
-                ))}
+                ))}\
               </div>
             </section>
 
