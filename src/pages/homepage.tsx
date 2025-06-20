@@ -15,26 +15,26 @@ import { ShoppingBag, Apple, Carrot, Milk, Search, Cookie } from 'lucide-react';
 
 // Sample Data with updated image URLs
 const promotions = [
-  { id: 1, imageUrl: 'https://source.unsplash.com/1200x400/?fruits,sale,discount,offer,grocery', altText: 'Fruits Discount' },
-  { id: 2, imageUrl: 'https://source.unsplash.com/1200x400/?vegetables,market,fresh,organic,promotion', altText: 'Fresh Vegetables' },
-  { id: 3, imageUrl: 'https://source.unsplash.com/1200x400/?snacks,chips,cookies,promotion,fiesta', altText: 'Snacks Fiesta' },
+  { id: 1, imageUrl: 'https://source.unsplash.com/1200x400/?grocery,store,aisle,discount,banner', altText: 'Grocery Store Discount Banner' },
+  { id: 2, imageUrl: 'https://source.unsplash.com/1200x400/?healthy,food,delivery,box,promotion', altText: 'Healthy Food Delivery Promotion' },
+  { id: 3, imageUrl: 'https://source.unsplash.com/1200x400/?online,grocery,shopping,app,deal', altText: 'Online Grocery Shopping Deal' },
 ];
 
 const categories = [
-  { name: 'Groceries', slug: 'groceries', Icon: ShoppingBag, imageUrl: 'https://source.unsplash.com/100x100/?groceries,food,basket' },
-  { name: 'Fruits', slug: 'fruits', Icon: Apple, imageUrl: 'https://source.unsplash.com/100x100/?fruits,apple,orange' },
-  { name: 'Vegetables', slug: 'vegetables', Icon: Carrot, imageUrl: 'https://source.unsplash.com/100x100/?vegetables,carrot,broccoli' },
-  { name: 'Dairy', slug: 'dairy', Icon: Milk, imageUrl: 'https://source.unsplash.com/100x100/?dairy,milk,cheese' },
-  { name: 'Snacks', slug: 'snacks', Icon: Cookie, imageUrl: 'https://source.unsplash.com/100x100/?snacks,chips,cookies' },
+  { name: 'Groceries', slug: 'groceries', Icon: ShoppingBag, imageUrl: 'https://source.unsplash.com/100x100/?shopping,cart,full,groceries' },
+  { name: 'Fruits', slug: 'fruits', Icon: Apple, imageUrl: 'https://source.unsplash.com/100x100/?assorted,colorful,fruits,market,stall' },
+  { name: 'Vegetables', slug: 'vegetables', Icon: Carrot, imageUrl: 'https://source.unsplash.com/100x100/?fresh,green,vegetables,farmers,market' },
+  { name: 'Dairy', slug: 'dairy', Icon: Milk, imageUrl: 'https://source.unsplash.com/100x100/?milk,cheese,yogurt,dairy,products' },
+  { name: 'Snacks', slug: 'snacks', Icon: Cookie, imageUrl: 'https://source.unsplash.com/100x100/?chips,pretzels,cookies,snack,aisle' },
 ];
 
 const featuredProducts: ProductCardProps[] = [
-  { id: 'fp1', slug: 'fresh-apples-1kg', name: 'Fresh Red Apples', price: 2.99, unit: '1kg', imageUrl: 'https://source.unsplash.com/300x300/?shiny,red,apples,orchard,closeup' },
-  { id: 'fp2', slug: 'organic-carrots-500g', name: 'Organic Carrots', price: 1.49, unit: '500g', imageUrl: 'https://source.unsplash.com/300x300/?vibrant,organic,carrots,bunch,fresh' },
-  { id: 'fp3', slug: 'whole-milk-1l', name: 'Fresh Whole Milk', price: 1.99, unit: '1L', imageUrl: 'https://source.unsplash.com/300x300/?fresh,whole,milk,carton,dairy,farm' },
-  { id: 'fp4', slug: 'potato-chips-large', name: 'Classic Potato Chips', price: 3.20, unit: 'Large Bag', imageUrl: 'https://source.unsplash.com/300x300/?crispy,potato,chips,snack,bowl' },
-  { id: 'fp5', slug: 'artisan-bread-loaf', name: 'Artisan Sourdough Bread', price: 4.50, unit: '1 Loaf', imageUrl: 'https://source.unsplash.com/300x300/?artisan,sourdough,bread,loaf,bakery,crusty' },
-  { id: 'fp6', slug: 'free-range-eggs-dozen', name: 'Free-Range Eggs', price: 3.99, unit: '1 Dozen', imageUrl: 'https://source.unsplash.com/300x300/?brown,free-range,eggs,carton,farm' },
+  { id: 'fp1', slug: 'fresh-apples-1kg', name: 'Fresh Red Apples', price: 2.99, unit: '1kg', imageUrl: 'https://source.unsplash.com/300x300/?crisp,red,gala,apples,basket' },
+  { id: 'fp2', slug: 'organic-carrots-500g', name: 'Organic Carrots', price: 1.49, unit: '500g', imageUrl: 'https://source.unsplash.com/300x300/?bright,orange,organic,carrots,bunch' },
+  { id: 'fp3', slug: 'whole-milk-1l', name: 'Fresh Whole Milk', price: 1.99, unit: '1L', imageUrl: 'https://source.unsplash.com/300x300/?cold,glass,milk,carton,breakfast' },
+  { id: 'fp4', slug: 'potato-chips-large', name: 'Classic Potato Chips', price: 3.20, unit: 'Large Bag', imageUrl: 'https://source.unsplash.com/300x300/?potato,chips,bowl,party,snack' },
+  { id: 'fp5', slug: 'artisan-bread-loaf', name: 'Artisan Sourdough Bread', price: 4.50, unit: '1 Loaf', imageUrl: 'https://source.unsplash.com/300x300/?freshly,baked,sourdough,bread,bakery' },
+  { id: 'fp6', slug: 'free-range-eggs-dozen', name: 'Free-Range Eggs', price: 3.99, unit: '1 Dozen', imageUrl: 'https://source.unsplash.com/300x300/?carton,brown,eggs,farm,kitchen' },
 ];
 
 const HomePage: React.FC = () => {
@@ -99,7 +99,7 @@ const HomePage: React.FC = () => {
                     IconComponent={category.imageUrl ? undefined : category.Icon}
                     imageUrl={category.imageUrl}
                   />
-                ))}
+                ))}\
               </div>
             </section>
 
@@ -116,7 +116,7 @@ const HomePage: React.FC = () => {
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4">
                 {featuredProducts.map((product) => (
                   <ProductCard key={product.id} {...product} />
-                ))}
+                ))}\
               </div>
             </section>
             
