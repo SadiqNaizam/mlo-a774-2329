@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { type LucideProps } from 'lucide-react'; // Using 'type' for type-only import
+import { cn } from '@/lib/utils'; // Assuming cn is available
 
 interface CategoryPillProps {
   /** The display name of the category */
@@ -10,6 +11,8 @@ interface CategoryPillProps {
   categorySlug: string;
   /** Optional icon component (e.g., from lucide-react) */
   IconComponent?: React.ComponentType<LucideProps & React.SVGProps<SVGSVGElement>>;
+  /** Optional image URL for the category. If provided, this will be displayed instead of the icon. */
+  imageUrl?: string;
   /** Optional additional CSS classes for custom styling */
   className?: string;
   /** Optional click handler if behavior beyond navigation is needed */
@@ -20,6 +23,7 @@ const CategoryPill: React.FC<CategoryPillProps> = ({
   categoryName,
   categorySlug,
   IconComponent,
+  imageUrl,
   className,
   onClick,
 }) => {
@@ -41,14 +45,19 @@ const CategoryPill: React.FC<CategoryPillProps> = ({
       asChild
       variant="outline"
       size="sm"
-      className={`rounded-full shadow-sm hover:shadow-md transition-shadow ${className}`}
-      // onClick prop on Button itself is not directly used when asChild is active for Link's navigation.
-      // If specific button click logic separate from navigation is needed, it's more complex.
-      // For now, Link handles the navigation.
+      className={cn("rounded-full shadow-sm hover:shadow-md transition-shadow", className)}
     >
-      <Link to={path} onClick={handleClick}>
-        {IconComponent && <IconComponent className="mr-1.5 h-4 w-4" />}
-        {categoryName}
+      <Link to={path} onClick={handleClick} className="flex items-center gap-1.5 px-3"> {/* Adjusted padding for content */}
+        {imageUrl ? (
+          <img
+            src={imageUrl}
+            alt={`${categoryName} category`}
+            className="h-5 w-5 rounded-full object-cover flex-shrink-0"
+          />
+        ) : IconComponent ? (
+          <IconComponent className="h-4 w-4 flex-shrink-0" />
+        ) : null}
+        <span className="truncate">{categoryName}</span>
       </Link>
     </Button>
   );
