@@ -96,12 +96,12 @@ const sampleProducts: { [key: string]: Product } = {
     slug: 'default-product',
     name: 'Amazing Product Title',
     images: [
-      'https://via.placeholder.com/600x600.png?text=Product+Image+1',
-      'https://via.placeholder.com/600x600.png?text=Product+Image+2',
-      'https://via.placeholder.com/600x600.png?text=Product+Image+3',
+      'https://source.unsplash.com/600x600/?modern,product,showcase,minimalist',
+      'https://source.unsplash.com/600x600/?lifestyle,item,display,elegant',
+      'https://source.unsplash.com/600x600/?sleek,product,design,contemporary',
     ],
     description: 'This is a brief, compelling description of the product, highlighting its key benefits and features.',
-    longDescription: 'This is a more detailed explanation of the product. It can cover various aspects like its usage, benefits, how it\'s made, and any special characteristics. It helps customers make an informed decision.',
+    longDescription: 'This is a more detailed explanation of the product. It can cover various aspects like its usage, benefits, how it\\'s made, and any special characteristics. It helps customers make an informed decision.',
     price: 19.99,
     unit: 'per item',
     category: 'General',
@@ -218,14 +218,14 @@ const ProductDetailPage: React.FC = () => {
                       ))}
                       <span className="text-sm text-muted-foreground ml-1">({product.reviewsCount} reviews)</span>
                     </div>
-                  )}
+                  )}\
 
                   <p className="text-gray-700">{product.description}</p>
 
                   {product.tags && product.tags.length > 0 && (
                     <div className="flex flex-wrap gap-2">
                       {product.tags.map(tag => (
-                        <Badge key={tag} variant={tag === 'Organic' ? 'default' : 'secondary'} className={tag === 'Organic' ? 'bg-green-600 hover:bg-green-700 text-white' : ''}>
+                        <Badge key={tag} variant={tag === 'Organic' ? 'default' : 'secondary'} className={tag === 'Organic' ? 'bg-green-600 hover:bg-green-700 text-white' : ''}>\
                           {tag === 'Organic' && <Leaf className="mr-1 h-3 w-3" />}
                           {tag}
                         </Badge>
@@ -248,7 +248,7 @@ const ProductDetailPage: React.FC = () => {
                       </Button>
                     </div>
                   </div>
-                  <Button size="lg" className="w-full" onClick={handleAddToCart} disabled={product.availability === 'Out of Stock'}>
+                  <Button size="lg" className="w-full" onClick={handleAddToCart} disabled={product.availability === 'Out of Stock'}>\
                     <ShoppingCart className="mr-2 h-5 w-5" />
                     {product.availability === 'Out of Stock' ? 'Out of Stock' : 'Add to Cart'}
                   </Button>
@@ -286,7 +286,7 @@ const ProductDetailPage: React.FC = () => {
                       </ul>
                     </AccordionContent>
                   </AccordionItem>
-                )}
+                )}\
 
                 {product.ingredients && product.ingredients.length > 0 && (
                   <AccordionItem value="ingredients">
@@ -300,7 +300,7 @@ const ProductDetailPage: React.FC = () => {
                       <p>{product.ingredients.join(', ')}</p>
                     </AccordionContent>
                   </AccordionItem>
-                )}
+                )}\
 
                 {product.storageInstructions && (
                   <AccordionItem value="storage">
@@ -314,7 +314,7 @@ const ProductDetailPage: React.FC = () => {
                       {product.storageInstructions}
                     </AccordionContent>
                   </AccordionItem>
-                )}
+                )}\
                 {product.countryOfOrigin && (
                   <AccordionItem value="origin">
                     <AccordionTrigger className="px-6 py-4 text-left hover:no-underline">
@@ -327,7 +327,7 @@ const ProductDetailPage: React.FC = () => {
                       {product.countryOfOrigin}
                     </AccordionContent>
                   </AccordionItem>
-                )}
+                )}\
               </Accordion>
             </div>
           </div>
