@@ -11,16 +11,16 @@ import { Search as SearchIcon } from 'lucide-react';
 
 // Mock product data with updated image URLs
 const allMockProducts: ProductCardProps[] = [
-  { id: '1', slug: 'fresh-avocado', name: 'Fresh Avocado Hass Variety', price: 1.99, unit: '1 pc', imageUrl: 'https://source.unsplash.com/300x300/?hass,avocado' },
-  { id: '2', slug: 'organic-bananas', name: 'Organic Bananas Bunch', price: 2.49, unit: 'approx 5-7 pcs', imageUrl: 'https://source.unsplash.com/300x300/?banana,bunch' },
-  { id: '3', slug: 'whole-milk', name: 'Fresh Whole Milk Grade A', price: 3.29, unit: '1 Gallon', imageUrl: 'https://source.unsplash.com/300x300/?gallon,milk' },
-  { id: '4', slug: 'sourdough-bread', name: 'Artisan Sourdough Bread Loaf', price: 4.99, unit: '1 loaf', imageUrl: 'https://source.unsplash.com/300x300/?sourdough,bread,loaf' },
-  { id: '5', slug: 'free-range-eggs', name: 'Large Free-Range Eggs', price: 3.99, unit: '1 dozen', imageUrl: 'https://source.unsplash.com/300x300/?dozen,eggs' },
-  { id: '6', slug: 'cherry-tomatoes', name: 'Sweet Cherry Tomatoes Pack', price: 2.79, unit: '1 pint', imageUrl: 'https://source.unsplash.com/300x300/?cherry,tomatoes,pack' },
-  { id: '7', slug: 'greek-yogurt', name: 'Plain Greek Yogurt Natural', price: 3.49, unit: '32 oz', imageUrl: 'https://source.unsplash.com/300x300/?greek,yogurt,tub' },
-  { id: '8', slug: 'almond-butter', name: 'Creamy Almond Butter Jar', price: 7.99, unit: '16 oz', imageUrl: 'https://source.unsplash.com/300x300/?almond,butter,jar' },
-  { id: '9', slug: 'spinach-bunch', name: 'Organic Spinach Bunch', price: 2.29, unit: '1 bunch', imageUrl: 'https://source.unsplash.com/300x300/?spinach,bunch' },
-  { id: '10', slug: 'pasta-linguine', name: 'Linguine Pasta Imported', price: 1.79, unit: '500g', imageUrl: 'https://source.unsplash.com/300x300/?linguine,pasta,package' },
+  { id: '1', slug: 'fresh-avocado', name: 'Fresh Avocado Hass Variety', price: 1.99, unit: '1 pc', imageUrl: 'https://source.unsplash.com/300x300/?ripe,hass,avocado,sliced,creamy' },
+  { id: '2', slug: 'organic-bananas', name: 'Organic Bananas Bunch', price: 2.49, unit: 'approx 5-7 pcs', imageUrl: 'https://source.unsplash.com/300x300/?yellow,organic,bananas,bunch,tropical' },
+  { id: '3', slug: 'whole-milk', name: 'Fresh Whole Milk Grade A', price: 3.29, unit: '1 Gallon', imageUrl: 'https://source.unsplash.com/300x300/?gallon,fresh,milk,dairy,refreshing' },
+  { id: '4', slug: 'sourdough-bread', name: 'Artisan Sourdough Bread Loaf', price: 4.99, unit: '1 loaf', imageUrl: 'https://source.unsplash.com/300x300/?crusty,artisan,sourdough,loaf,bakery' },
+  { id: '5', slug: 'free-range-eggs', name: 'Large Free-Range Eggs', price: 3.99, unit: '1 dozen', imageUrl: 'https://source.unsplash.com/300x300/?farm,fresh,eggs,dozen,natural' },
+  { id: '6', slug: 'cherry-tomatoes', name: 'Sweet Cherry Tomatoes Pack', price: 2.79, unit: '1 pint', imageUrl: 'https://source.unsplash.com/300x300/?juicy,cherry,tomatoes,vine,red' },
+  { id: '7', slug: 'greek-yogurt', name: 'Plain Greek Yogurt Natural', price: 3.49, unit: '32 oz', imageUrl: 'https://source.unsplash.com/300x300/?creamy,plain,greek,yogurt,bowl,healthy' },
+  { id: '8', slug: 'almond-butter', name: 'Creamy Almond Butter Jar', price: 7.99, unit: '16 oz', imageUrl: 'https://source.unsplash.com/300x300/?natural,almond,butter,jar,spread,smooth' },
+  { id: '9', slug: 'spinach-bunch', name: 'Organic Spinach Bunch', price: 2.29, unit: '1 bunch', imageUrl: 'https://source.unsplash.com/300x300/?leafy,green,organic,spinach,fresh' },
+  { id: '10', slug: 'pasta-linguine', name: 'Linguine Pasta Imported', price: 1.79, unit: '500g', imageUrl: 'https://source.unsplash.com/300x300/?dry,linguine,pasta,package,italian,wheat' },
 ];
 
 const ProductListingPage: React.FC = () => {
@@ -141,7 +141,7 @@ const ProductListingPage: React.FC = () => {
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-4">
             {displayedProducts.map((product) => (
               <ProductCard key={product.id} {...product} />
-            ))}
+            ))}\
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center h-full min-h-[200px] text-center py-10">
@@ -149,7 +149,8 @@ const ProductListingPage: React.FC = () => {
             <p className="text-xl text-muted-foreground">No products found.</p>
             {searchTerm && <p className="text-sm text-muted-foreground mt-1">Try adjusting your search or filters.</p>}
           </div>
-        )}\n        <div className="mt-8 border-t pt-8"> {/* Ensure footer is visually separated and has space */}
+        )}
+        <div className="mt-8 border-t pt-8"> {/* Ensure footer is visually separated and has space */}
           <StandardFooter />
         </div>
       </ScrollArea>
