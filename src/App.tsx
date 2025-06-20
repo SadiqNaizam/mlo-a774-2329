@@ -10,6 +10,7 @@ import CheckoutPage from "./pages/CheckoutPage";
 import HomePage from "./pages/HomePage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import ProductListingPage from "./pages/ProductListingPage";
+import UserProfilePage from "./pages/UserProfilePage"; // Import the new profile page
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/product-detail" element={<ProductDetailPage />} />
           <Route path="/product-listing" element={<ProductListingPage />} />
+          <Route path="/profile" element={<UserProfilePage />} /> {/* Add route for profile page */}
           {/* catch-all */}
           <Route path="*" element={<NotFound />} />
 
