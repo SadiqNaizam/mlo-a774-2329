@@ -14,6 +14,7 @@ const AppHeader: React.FC = () => {
     { href: '/', label: 'Home' },
     { href: '/product-listing', label: 'Products' },
     { href: '/cart', label: 'Cart' },
+    { href: '/profile', label: 'Profile' }, // Added Profile link
   ];
 
   return (
@@ -86,7 +87,7 @@ const AppHeader: React.FC = () => {
 
           {/* User/Account Icon */}
           <Button variant="ghost" size="icon" asChild>
-            <Link to="/"> {/* Placeholder link, e.g. to /account or /profile */}
+            <Link to="/profile"> {/* Updated link to /profile */}
               <User className="h-5 w-5" />
               <span className="sr-only">Account</span>
             </Link>
